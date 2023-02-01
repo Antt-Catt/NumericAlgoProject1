@@ -20,7 +20,7 @@ def sc_writing_pow(x):
         while (x*(10**i) < 1):
             i += 1
         return -i
-
+#Ecriture deciale reduite
 def rp(x,p):
     i_sc = sc_writing_pow(x)
     x_sc = x / (10**i_sc)
@@ -97,6 +97,8 @@ def nb_sgnf_numbers(x):
     
     # return len(x_sc)-1
 
+#On 'essaie' de chercher le nombre de chiffres significatifs
+"""
 def test_nb_sgnf_numbers():
 
     x_1=0.000125
@@ -111,9 +113,13 @@ def test_nb_sgnf_numbers():
     assert(nb_sgnf_numbers(x_4) == 2)
 
 test_nb_sgnf_numbers()
-
+"""
+#On choisit 6 chiffres significatifs
 def add(x_1,x_2):
     p=6
     return rp(x_1,p)+rp(x_2,p)
 
+def mult(x_1,x_2):
+    res = x_1 * x_2
+    return rp(res,6)
 
