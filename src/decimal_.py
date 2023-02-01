@@ -72,3 +72,48 @@ def test_rp():
 
 test_rp()
 
+def nb_sgnf_numbers(x):
+    print(x," :")
+    x_str = str(x)
+    cmp=0
+    i=0
+    while ( x_str[i]=='0' or x_str[i]=='.'):
+        i+=1
+    while i<len(x_str):
+        if x_str[i]!='.':
+            cmp+=1
+        print("    i:", i, " cmp:",cmp)
+        i+=1
+    return cmp
+
+
+    # #probleme pour x_2 et x_4 
+    # i_sc = sc_writing_pow(x)
+    # x_sc = x / (10**i_sc)
+    # x_sc=str(x_sc)
+    # print(x_sc)
+    # if x_sc[-1]=='0':
+    #     return 1
+    
+    # return len(x_sc)-1
+
+def test_nb_sgnf_numbers():
+
+    x_1=0.000125
+    x_2=000012500.00
+    x_5=12500.0
+    x_3=00.01
+    x_4= 00.010
+
+    assert(nb_sgnf_numbers(x_1) == 3)
+    assert(nb_sgnf_numbers(x_3) == 1)
+    assert(nb_sgnf_numbers(x_2) == 6)
+    assert(nb_sgnf_numbers(x_4) == 2)
+
+test_nb_sgnf_numbers()
+
+def add(x_1,x_2):
+    p=6
+    return rp(x_1,p)+rp(x_2,p)
+
+
