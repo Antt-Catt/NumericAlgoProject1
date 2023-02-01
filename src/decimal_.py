@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
 # def rp(x,p):
 #     k = x
 #     i=0
@@ -116,10 +120,61 @@ test_nb_sgnf_numbers()
 """
 #On choisit 6 chiffres significatifs
 def add(x_1,x_2):
-    p=6
+    p=3
     return rp(x_1,p)+rp(x_2,p)
 
 def mult(x_1,x_2):
     res = x_1 * x_2
-    return rp(res,6)
+    return rp(res,3)
+
+def delta_add(x,y):
+    return abs(((x+y)-add(x,y)))/abs(x+y)
+
+print(delta_add(12453035,1890692))
+
+def delta_mult(x,y):
+    return abs(((x*y)-mult(x,y)))/abs(x*y)
+
+print(delta_mult(12453035,1890692))
+
+
+def question_5():
+    max_delta_add=0
+    max_delta_mult=0
+    max_x=0
+    max_y=0
+    max_x_m=0
+    max_y_m=0
+    x=6213.1358
+    # for x in range(1,1000000):
+    for y in range(1,1000000):
+        y=y/100
+        d_a=delta_add(x,y)
+        d_m=delta_mult(x,y)
+        if d_a>max_delta_add:
+            max_delta_add=d_a
+            max_x=x
+            max_y=y
+        if d_m>max_delta_mult:
+            max_delta_mult=d_m
+            max_x_m=x
+            max_y_m=y
+    print("add : max : ",max_delta_add,"pour : ",max_x,"et",max_y)
+    print("mul : max : ",max_delta_mult,"pour : ",max_x_m,"et",max_y_m)
+
+# question_5()
+
+
+Y=np.arange(15,20,0.001)
+print(Y[0],Y[1],Y[2])
+# plt.plot(delta_add(6213.1358,Y))
+D_m = []
+for k in range(len(Y)):
+    D_m.append(delta_mult(6213.1358,Y[k]))
+print("ok")
+print(type(Y),type(D_m))
+plt.plot(Y,D_m)
+plt.ylabel('Delta_multiplication de x par y')
+plt.xlabel('variation de y, avec x fixé à 3213.1358')
+plt.show()
 
