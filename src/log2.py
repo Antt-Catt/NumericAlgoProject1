@@ -1,3 +1,5 @@
+from decimal_ import *
+
 def calc_log(p):
     res = 0
     for n in range(1, 1000000):
@@ -7,4 +9,4 @@ def calc_log(p):
             res += 1/n
     return rp(res,p)
 
-print(calc_log(4))
+print(calc_log(20))
