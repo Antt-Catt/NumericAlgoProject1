@@ -2,6 +2,13 @@
 
 \usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{algorithm2e}
+\usepackage{enumerate,enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
 
 %%%%%%%%%%%%%%%% Lengths %%%%%%%%%%%%%%%%
 \setlength{\textwidth}{15.5cm}
@@ -40,38 +47,61 @@
 
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Présentation du travail
-  ~~~\parbox{0.95\textwidth}{\small \textit{Résumé~:} \sffamily Ce
-  projet consiste à mettre en place un mécanisme basé sur un
-  accélérateur de particules, afin de générer un trou noir permettant
-  de cuire une soupe aux choux par rayonnement Hawking. La première
-  partie décrit les détails de construction de l'accélérateur, tandis
-  que la seconde partie s'intéresse aux suites possibles de
-  l'ingestion de la soupe. }
+   ~~~\parbox{0.95\textwidth}{\small \textit{Résumé~:} \sffamily Ce projet consiste à l’application de méthodes de calcul numérique et aux limitations que l'on rencontre. La première partie met en évidence des exemples dans lesquels les opérations élémentaires ne sont pas assez précises, tandis que la seconde partie s'intéresse à l'approximation du logarithme népérien et aux algorithmes CORDIC utilisés dans les calculatrices de poche.}
   \vskip 1mm ~
 
-  
   %%%%%%%%%%%%%%%%%%%%%%%%%%%% motivation du projet
-
-
   %%%%%%%%%%%%%%%%%%%%%%%%%%%% lien avec le cours
 
+Ce projet est en lien direct avec le cours d'IS104 dans lequel nous nous sommes intéressés aux méthodes de calcul numérique. Il permet notamment d'illustrer les limitations que l'on peut rencontrer.
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%% part du projet réalisée
+  % Non nécessaire : projet réalisé en intégralité
+\end{minipage}
 
   
 %%%%%%%%%%%%%%%% Main part %%%%%%%%%%%%%%%%
-\section*{Recette}
+\section{Représentation des nombres en machine}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Code
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% chapeau d'introduction de la partie 1
 
+\textit{Dans cette partie, nous allons utiliser Python pour réaliser des simulations de représentation des nombres en machine. En particulier, nous définirons une fonction permettant d'obtenir la représentation décimale réduite d'un réel et nous nous appuierons sur cette fonction pour simuler les opérations d'addition et de multiplication sur machine.}
+\bigbreak
+
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Partie 1
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% repésentation décimale réduite
  
+Tout d'abord, nous avons implémenté en Python une fonction \verb|rp(x,p)| permettant d'obtenir la représentation décimale réduite d'un réel $x$. La variable $p$ désigne la précision des décimales.
+
+Cette fonction commence par écrire $x$ sous son écriture scientifique, réalise ensuite un arrondi à $p-1$ décimales et repasse enfin $x$ dans son écriture standard.
+
+Le jeu de valeurs représenté en figure~\ref{fig:tests_rp} permet d'illustrer le fonctionnement de cette fonction. Nous nous sommes également servi de ces valeurs afin de vérifier le bon fonctionnement de la fonction.
+
+\begin{figure}[h]
+  \centering
+  \begin{tabular}{|l|l|l|}
+    \hline
+    $x$ & $\texttt{rp(x,4)}$ & $\texttt{rp(x,6)}$ \\
+    \hline
+    $3,141592658$ & $3,142$ & $3,14159$ \\
+    \hline
+    $10507,1823$ & $10510$ & $10507,2$ \\
+    \hline
+    $0,0001857563$ & $0,0001858$ & $0,000185756$ \\
+    \hline
+  \end{tabular}
+   \caption{Jeu de valeurs servant aux tests de la fonction \texttt{rp(x,p)}}
+   \label{fig:tests_rp}
+\end{figure}
+
+Le passage en écriture scientifique est une opération de complexité temporelle d'ordre $O(\log(x))$. Le passage inverse est de coût constant car on garde en mémoire la puissance de $10$ de l'écriture scientifique. L'opération d'arrondi est considérée comme constante. Ainsi, la complexité temporelle de \verb|rp(x,p)| est de l'ordre de $O(\log(x))$.
+\bigbreak
+
   %%%%%%%%%%%%%%%%%%%%%% description
 
   %%%%%%%%% nom de la fonction
@@ -88,8 +118,14 @@
 
 
 
+
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% addition et multiplication en représation décimale réduite
  
+À partir de cette fonction, nous avons pu réaliser des fonctions d'addition et de multiplication qui s'appuyent sur la représentation décimale réduite.
+
+Ces fonctions sont \verb|add(x1,x2)| et \verb|mult(x1,x2)| et réalisent respectivement l'addition et la multiplication des représentations décimales de \verb|x1| et \verb|x2| à la précision $p=3$. Nous réalisons ces opérations à l'aide de la fonction \verb|rp(x,p)|.
+\bigbreak
+
   %%%%%%%%%%%%%%%%%%%%%% description
 
   %%%%%%%%% nom de la fonction
@@ -107,6 +143,87 @@
 
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% erreur relative réalisée en ajoutant y à x
+ 
+Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avons pu étudier les erreurs relatives de ces opérations en implémentant deux nouvelles fonctions, \verb|delta_add(x,y)| et \verb|delta_mult(x,y)|. Les opérations réalisées par ces deux fonctions sont représentées par les équation~\ref{eq:delta_add} et~\ref{eq:delta_mult}.
+
+\begin{equation}
+  \texttt{delta\_add(x,y)} = \dfrac{\big\vert x + y - \texttt{add(x,y)} \big\vert}{\big\vert x+y \big\vert}
+  \label{eq:delta_add}
+\end{equation}
+
+\begin{equation}
+  \texttt{delta\_mult(x,y)} = \dfrac{\big\vert x \times y - \texttt{mult(x,y)} \big\vert}{\big\vert x\times y \big\vert}
+  \label{eq:delta_mult}
+\end{equation}
+
+À l'aide de ces fonctions, nous pouvons réaliser l'étude des erreurs relatives pour un $x$ fixé. Voir fin du document pour les graphes des tests réalisés.
+
+[commenter les graphes avec les références]
+
+
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{Partie1-delta_add_0-100.png}
+    \caption{...}
+    \label{fig:delta_add_big}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{Partie1-delta_add_95-125.png}
+    \caption{...}
+    \label{fig:delta_add_zoom}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+      \includegraphics[width=\linewidth]{Partie1-delta_mult_0-100.png}
+      \caption{...}
+      \label{fig:delta_multi_big}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{Partie1-delta_mult_15-20.png}
+    \caption{...}
+    \label{fig:delta_mult_zoom}
+    \end{subfigure}
+  
+  \caption{tests addition et multiplication}
+  
+\end{figure}
+
+
+
+
+
+%\begin{figure}[ht]
+%  \centering
+%  \includegraphics[width=0.5\textwidth]{Partie1-delta_add_0-100.png}
+%  \caption{...}
+%  \label{fig:delta_add_big}        
+%\end{figure}
+
+%\begin{figure}[ht]
+%  \centering
+%  \includegraphics[width=0.5\textwidth]{Partie1-delta_add_95-125.png}
+%  \caption{...}
+%  \label{fig:delta_add_zoom}        
+%\end{figure}
+
+%\begin{figure}[ht]
+%  \centering
+%  \includegraphics[width=0.5\textwidth]{Partie1-delta_mult_0-100.png}
+%  \caption{...}
+%  \label{fig:delta_mult_big}        
+%\end{figure}
+
+%\begin{figure}[ht]
+  %\centering
+  %\includegraphics[width=0.5\textwidth]{Partie1-delta_mult_15-20.png}
+  %\caption{...}
+ % \label{fig:delta_mult_zoom}        
+%\end{figure}
  
   %%%%%%%%%%%%%%%%%%%%%% description
 
@@ -158,9 +275,32 @@
 
   %%%%%%%%%% évaluation du comportement dans les cas limites
 
-
+\section{Logarithme népérien de 2}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% chapeau d'introduction de la partie 2
-  
+\textit{Il s'agit i\c ci de mettre en application la partie 1 en calculant une valeur approchée de $\log(2)$ sur p d\'ecimales, tout en \'evaluant l'erreur relative obtenue. L'algorithme (codé en python) utilisé est le suivant : }
+
+\begin{algorithm}
+  \caption{Calcul d'une valeur approchée de log(2) sur p d\'ecimales}
+  \KwData{int p}
+  \KwResult{log(2)}
+  $res \gets 0$\;
+  $i \gets 1$\;
+  \While{$i<10^6$}{
+    \eIf{$i$ is even}{
+      $res \gets res - \frac{1}{i}$\;
+    }{$res \gets res + \frac{1}{i}$\;}
+    $i \gets i + 1$\;
+  }
+  Return rp(res,p)\;
+\end{algorithm}
+
+[commentaire]
+
+[erreure relative]
+
+%%%[ erreur relative ?  ]%%%[ commentaire ]
+
+
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Partie 2
 
@@ -182,21 +322,43 @@
   %%%%%%%%%% évaluation du comportement dans les cas limites
 
 
-
+\section{Algorithmes CORDIC}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% algorithmes CORDIC
- 
+\textit{Les ressources disponibles en m\'emoire ou en puissance de calculs sont en g\'en\'eral limit\'ees. Il devient donc n\'ec\'essaire de disposer d'algorithmes qui permettent de contourner ces limitations tout en conservant des résultats de calculs satisfaisants. Dans cette section, on s'int\'eresse à l'exemple d'une calculatrice typique.}
+\vskip 1mm ~
+
+
   %%%%%%%%%%%%%%%%%%%%%% Calculatrice
+  %%%%%%%%%%% référence
 
+{\small \textit{\textbf{N.B:}} \emph{ Les réponses ci-dessous sont en partie inspirée du chapitre VI.2 de la FAQ\footnote{http://www.usenet-fr.net/fur/maths/maths-faq-3.html} du groupe de discussions fr.sci.maths\footnote{https://groups.google.com/g/fr.sci.maths}}.
+  \vskip 0.01mm ~
+ 
   %%%%%%%%% représentation des nombres utilisés sur une calculatrice
-
-  %%%%%%%%% avantages de ce genre de représentation
-
-  %%%%%%%%% inconvénients de ce genre de présentation
+  Dans une calculatrice typique un nombre 'flottant' occupe 8 octets de m\'emoire et est d\'ecompos\'e en:
+  \begin{itemize}
+     \item une mantisse de 13 chiffres cod\'es ind\'ependamment sur 4 chiffres binaires (Binaire Code Decimal ou BCD)
+     \item un exposant (puissance de 10) \'eventuellement sign\'e
+     \item le signe du nombre (et de l'exposant s'il n'est pas sign\'e)
+  \end{itemize}
 
   
- 
+  %%%%%%%%% avantages et inconvénients de ce genre de représentation
+  Ceci a l'avantage de permettre la r\'ealisation d'op\'erations complexes avec du mat\'eriel plus ou moins mnimal. De plus, le calcul de toute fonction standard est ramen\'e au calcul des quatre fonctions : ln, exp, tan et arctan. Cela est cependant conditionn\'e par la donnée de certaines valeurs pr\'ecalcul\'ees, ce qui peut \^etre consid\'er\'e comme un inconv\'enient. D'autre part, l'efficacit\'e des algorithmes diminue en augmentant la valeur des nombres calcul\'es.
+
+  \vskip 1mm ~
+
   %%%%%%%%%%%%%%%%%%%%%%% algorithmes pour calculer les fonctions exp et trigonométriques
 
+  Concr\'etement, plusieurs techniques se pr\'esentent pour r\'ealiser cette t\^ache. En particulier, on s'int\'erresse aux algorithmes CORDIC (Coordinate Rotation Digital Computer) sur les calculatrices, introduient dans la m\^eme section mention\'ee ci-dessus. La technique de base n\'ecc\'essite une valeur pr\'ecalcul\'ee (par exemple $\ln(10)$ pour le calcul de la fonction $\ln$) et se d\'eroule en deux \'etapes :
+  \begin{enumerate}
+  \item Ramener la valeur à \'evaluer dans l'intervalle où la m\'ethode est applicable. Voici un exemple de transformations utilis\'ees pour le calcul de la fonction $\ln$ sur [1,10[ :
+      \begin{equation}
+        ln(x) = ln(x*10^{-n}) + n*ln(10)
+      \end{equation}
+    \item Appliquer l'algorithme correspondant en int\'erant sur l'indice k de l'\'el\'ement pr\'ecalcul\'e en comman\c cant par le plus grand terme.
+  \end{enumerate}
+  Cette m\'ethode est bien adapt\'ee aux conditions impos\'ees par une calculatrice, entre autres : une m\'emoire et une puissance de calcul limit\'ee.
   %%%%%%%%% technique générale utilisée
 
   %%%%%%%%% efficacité lorsqu'elle est ramenée à une calculatrice
@@ -267,6 +429,6 @@
 
   
   
-\end{minipage}
+
 
 \end{document}
