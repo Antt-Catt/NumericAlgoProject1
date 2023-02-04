@@ -9,6 +9,7 @@
 \usepackage{enumerate,enumitem}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{url}
 
 %%%%%%%%%%%%%%%% Lengths %%%%%%%%%%%%%%%%
 \setlength{\textwidth}{15.5cm}
@@ -62,7 +63,7 @@ Ce projet est en lien direct avec le cours d'IS104 dans lequel nous nous sommes 
   
 %%%%%%%%%%%%%%%% Main part %%%%%%%%%%%%%%%%
 \section{Représentation des nombres en machine}
-
+\label{sec:repr_nb_machine}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Code
 
@@ -276,13 +277,15 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
   %%%%%%%%%% évaluation du comportement dans les cas limites
 
 \section{Logarithme népérien de 2}
+\label{sec:ln}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% chapeau d'introduction de la partie 2
-\textit{Il s'agit i\c ci de mettre en application la partie 1 en calculant une valeur approchée de $\log(2)$ sur p d\'ecimales, tout en \'evaluant l'erreur relative obtenue. L'algorithme (codé en python) utilisé est le suivant : }
+\textit{Il s'agit ici de mettre en application la partie 1 en calculant une valeur approchée de $\log(2)$ sur p d\'ecimales, tout en \'evaluant l'erreur relative obtenue. L'algorithme~\ref{alg:algo_ln} (codé en python) est celui qui sera utilisé.}
 
 \begin{algorithm}
-  \caption{Calcul d'une valeur approchée de log(2) sur p d\'ecimales}
-  \KwData{int p}
-  \KwResult{log(2)}
+  \caption{Calcul d'une valeur approchée de $\log(2)$ sur p d\'ecimales}
+  \label{alg:algo_ln}
+  \KwData{int $p$}
+  \KwResult{$log(2)$}
   $res \gets 0$\;
   $i \gets 1$\;
   \While{$i<10^6$}{
@@ -291,7 +294,7 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
     }{$res \gets res + \frac{1}{i}$\;}
     $i \gets i + 1$\;
   }
-  Return rp(res,p)\;
+  Return $\texttt{rp(}res,p\texttt{)}$\;
 \end{algorithm}
 
 [commentaire]
@@ -323,15 +326,17 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
 
 
 \section{Algorithmes CORDIC}
+\label{sec:cordic}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% algorithmes CORDIC
-\textit{Les ressources disponibles en m\'emoire ou en puissance de calculs sont en g\'en\'eral limit\'ees. Il devient donc n\'ec\'essaire de disposer d'algorithmes qui permettent de contourner ces limitations tout en conservant des résultats de calculs satisfaisants. Dans cette section, on s'int\'eresse à l'exemple d'une calculatrice typique.}
+
+\textit{Les ressources disponibles en m\'emoire ou en puissance de calcul sont en g\'en\'eral limit\'ees. Il devient donc n\'ecessaire de disposer d'algorithmes qui permettent de contourner ces limitations tout en conservant des résultats de calculs satisfaisants. Dans cette section, on s'int\'eresse à l'exemple d'une calculatrice typique.}
 \vskip 1mm ~
 
 
   %%%%%%%%%%%%%%%%%%%%%% Calculatrice
   %%%%%%%%%%% référence
 
-{\small \textit{\textbf{N.B:}} \emph{ Les réponses ci-dessous sont en partie inspirée du chapitre VI.2 de la FAQ\footnote{http://www.usenet-fr.net/fur/maths/maths-faq-3.html} du groupe de discussions fr.sci.maths\footnote{https://groups.google.com/g/fr.sci.maths}}.
+{\small \textit{\textbf{N.B:}} \emph{ Les réponses ci-dessous sont en partie inspirée du chapitre VI.2 de la FAQ\footnote{\url{http://www.usenet-fr.net/fur/maths/maths-faq-3.html}} du groupe de discussions fr.sci.maths\footnote{\url{https://groups.google.com/g/fr.sci.maths}}}.
   \vskip 0.01mm ~
  
   %%%%%%%%% représentation des nombres utilisés sur une calculatrice
@@ -344,19 +349,19 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
 
   
   %%%%%%%%% avantages et inconvénients de ce genre de représentation
-  Ceci a l'avantage de permettre la r\'ealisation d'op\'erations complexes avec du mat\'eriel plus ou moins mnimal. De plus, le calcul de toute fonction standard est ramen\'e au calcul des quatre fonctions : ln, exp, tan et arctan. Cela est cependant conditionn\'e par la donnée de certaines valeurs pr\'ecalcul\'ees, ce qui peut \^etre consid\'er\'e comme un inconv\'enient. D'autre part, l'efficacit\'e des algorithmes diminue en augmentant la valeur des nombres calcul\'es.
+  Ceci a l'avantage de permettre la r\'ealisation d'op\'erations complexes avec du mat\'eriel plus ou moins minimal. De plus, le calcul de toute fonction standard est ramen\'e au calcul des quatre fonctions : ln, exp, tan et arctan. Cela est cependant conditionn\'e par la donnée de certaines valeurs pr\'ecalcul\'ees, ce qui peut \^etre consid\'er\'e comme un inconv\'enient. D'autre part, l'efficacit\'e des algorithmes diminue en augmentant la valeur des nombres calcul\'es.
 
   \vskip 1mm ~
 
   %%%%%%%%%%%%%%%%%%%%%%% algorithmes pour calculer les fonctions exp et trigonométriques
 
-  Concr\'etement, plusieurs techniques se pr\'esentent pour r\'ealiser cette t\^ache. En particulier, on s'int\'erresse aux algorithmes CORDIC (Coordinate Rotation Digital Computer) sur les calculatrices, introduient dans la m\^eme section mention\'ee ci-dessus. La technique de base n\'ecc\'essite une valeur pr\'ecalcul\'ee (par exemple $\ln(10)$ pour le calcul de la fonction $\ln$) et se d\'eroule en deux \'etapes :
+  Maintenant, nous voulons trouver un moyen pour évaluer les fonctions exponentielle et trigonométriques. Concr\'etement, plusieurs techniques se pr\'esentent pour r\'ealiser cette t\^ache. En particulier, on s'int\'eresse aux algorithmes CORDIC (Coordinate Rotation Digital Computer) sur les calculatrices, introduient dans la m\^eme section qu'évoquée en début de section~\ref{sec:cordic}. La technique de base nécessite une valeur pr\'ecalcul\'ee (par exemple $\ln(10)$ pour le calcul de la fonction $\ln$) et se d\'eroule en deux \'etapes :
   \begin{enumerate}
-  \item Ramener la valeur à \'evaluer dans l'intervalle où la m\'ethode est applicable. Voici un exemple de transformations utilis\'ees pour le calcul de la fonction $\ln$ sur [1,10[ :
+  \item Ramener la valeur à \'evaluer dans l'intervalle où la m\'ethode est applicable. Voici un exemple de transformation utilis\'ee pour le calcul de la fonction $\ln$ sur $[1,10[$ :
       \begin{equation}
-        ln(x) = ln(x*10^{-n}) + n*ln(10)
+        \ln(x) = \ln(x*10^{-n}) + n*\ln(10)
       \end{equation}
-    \item Appliquer l'algorithme correspondant en int\'erant sur l'indice k de l'\'el\'ement pr\'ecalcul\'e en comman\c cant par le plus grand terme.
+    \item Appliquer l'algorithme correspondant en int\'erant sur l'indice k de l'\'el\'ement pr\'ecalcul\'e en commen\c cant par le plus grand terme.
   \end{enumerate}
   Cette m\'ethode est bien adapt\'ee aux conditions impos\'ees par une calculatrice, entre autres : une m\'emoire et une puissance de calcul limit\'ee.
   %%%%%%%%% technique générale utilisée
