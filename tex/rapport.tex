@@ -157,45 +157,40 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
   \texttt{delta\_mult(x,y)} = \dfrac{\big\vert x \times y - \texttt{mult(x,y)} \big\vert}{\big\vert x\times y \big\vert}
   \label{eq:delta_mult}
 \end{equation}
-
-À l'aide de ces fonctions, nous pouvons réaliser l'étude des erreurs relatives pour un $x$ fixé. Voir fin du document pour les graphes des tests réalisés.
-
-[commenter les graphes avec les références]
-
+À l'aide de ces fonctions, nous pouvons réaliser l'étude des erreurs relatives pour un $x$ fixé. Voir fin du document pour les graphes des tests réalisés. Ces erreurs relatives sont représentées en figure~\ref{fig:relative_error}.
 
 \begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \includegraphics[width=\linewidth]{Partie1-delta_add_0-100.png}
-    \caption{...}
-    \label{fig:delta_add_big}
+    \caption{Erreur relative pour l'addition de $x = ????$ et $y\in[0,100]$}
+    \label{subfig:delta_add_big}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \includegraphics[width=\linewidth]{Partie1-delta_add_95-125.png}
-    \caption{...}
-    \label{fig:delta_add_zoom}
+    \caption{Erreur relative pour l'addition de $x = ????$ et $y\in[95,125]$}
+    \label{subfig:delta_add_zoom}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
       \includegraphics[width=\linewidth]{Partie1-delta_mult_0-100.png}
-      \caption{...}
-      \label{fig:delta_multi_big}
+      \caption{Erreur relative pour la multiplication de $x = ????$ et $y\in[0,100]$}
+      \label{subfig:delta_multi_big}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \includegraphics[width=\linewidth]{Partie1-delta_mult_15-20.png}
-    \caption{...}
-    \label{fig:delta_mult_zoom}
+    \caption{Erreur relative pour la multiplication de $x = ????$ et $y\in[15,20]$}
+    \label{subfig:delta_mult_zoom}
     \end{subfigure}
-  
-  \caption{tests addition et multiplication}
-  
+  \caption{Représentations des erreurs relatives pour l'addition et la multiplication}
+  \label{fig:relative_error}
 \end{figure}
 
-
+[COMMENTAIRES AVEC RÉFÉRENCES]
 
 
 
@@ -304,6 +299,22 @@ Nous avons commencé par réaliser l'implémentation de l'algorithme~\ref{alg:al
 
 %%%[ erreur relative ?  ]%%%[ commentaire ]
 
+
+Afin d'estimer l'erreur relative commise par la fonction \verb|calc_log|, nous avons implémenté, avec une fonction \verb|delta_log|, le calcul présenté par l'équation~\ref{eq:delta_log}.
+
+\begin{equation}
+  \texttt{delta\_log(p)} = \dfrac{\big\vert \log(2) - \texttt{calc\_log(p)} \big\vert}{\big\vert \log(2) \big\vert}
+  \label{eq:delta_log}
+ \end{equation} 
+
+La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des valeurs de $p$ allant de $1$ à $20$. On peut remarquer que l'erreur est relativement importante pour $p<3$, mais que au-delà de $p=5$, l'erreur se stabilise environ à $2.10^{-5}$, ce qui représente une erreur acceptable.
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[width=0.8\textwidth]{partie2_relative_error_log.png}
+ \caption{Erreur relative de la fonction $\texttt{calc\_log}$ pour différentes valeurs de $p$}
+ \label{fig:relative_error_log}        
+\end{figure}
 
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Partie 2
