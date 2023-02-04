@@ -12,17 +12,17 @@ def calc_log(p):
             res += 1/n
     return rp(res,p)
 
-def delta_log(x,p):
-    return abs(((math.log(x))-calc_log(p)))/abs(math.log(x))
+def delta_log(p):
+    return abs(((math.log(2))-calc_log(p)))/abs(math.log(2))
 
 def plot_delta_log():
     p = np.linspace(1,20,20) # p varie de 1 à 20
     log_approx = []
     for i in range(1,21):
-        log_approx.append(delta_log(2,i))
+        log_approx.append(delta_log(i))
     plt.plot(p,log_approx)
     plt.xlabel('valeur de p')
-    plt.ylabel('delta_log(2,p) : erreur relative de log(2)')
+    plt.ylabel('delta_log(p) : erreur relative de log(2)')
     plt.show()
     return None
 
