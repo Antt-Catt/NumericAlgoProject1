@@ -70,7 +70,7 @@ Ce projet est en lien direct avec le cours d'IS104 dans lequel nous nous sommes 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% chapeau d'introduction de la partie 1
 
 \textit{Dans cette partie, nous allons utiliser Python pour réaliser des simulations de représentation des nombres en machine. En particulier, nous définirons une fonction permettant d'obtenir la représentation décimale réduite d'un réel et nous nous appuierons sur cette fonction pour simuler les opérations d'addition et de multiplication sur machine.}
-\bigbreak
+\vskip 1mm ~
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Partie 1
 
@@ -101,7 +101,7 @@ Le jeu de valeurs représenté en figure~\ref{fig:tests_rp} permet d'illustrer l
 \end{figure}
 
 Le passage en écriture scientifique est une opération de complexité temporelle d'ordre $O(\log(x))$. Le passage inverse est de coût constant car on garde en mémoire la puissance de $10$ de l'écriture scientifique. L'opération d'arrondi est considérée comme constante. Ainsi, la complexité temporelle de \verb|rp(x,p)| est de l'ordre de $O(\log(x))$.
-\bigbreak
+\vskip 1mm ~
 
   %%%%%%%%%%%%%%%%%%%%%% description
 
@@ -125,7 +125,7 @@ Le passage en écriture scientifique est une opération de complexité temporell
 À partir de cette fonction, nous avons pu réaliser des fonctions d'addition et de multiplication qui s'appuyent sur la représentation décimale réduite.
 
 Ces fonctions sont \verb|add(x1,x2)| et \verb|mult(x1,x2)| et réalisent respectivement l'addition et la multiplication des représentations décimales de \verb|x1| et \verb|x2| à la précision $p=3$. Nous réalisons ces opérations à l'aide de la fonction \verb|rp(x,p)|.
-\bigbreak
+\vskip 1mm ~
 
   %%%%%%%%%%%%%%%%%%%%%% description
 
@@ -279,7 +279,10 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
 \section{Logarithme népérien de 2}
 \label{sec:ln}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% chapeau d'introduction de la partie 2
-\textit{Il s'agit ici de mettre en application la partie 1 en calculant une valeur approchée de $\log(2)$ sur p d\'ecimales, tout en \'evaluant l'erreur relative obtenue. L'algorithme~\ref{alg:algo_ln} (codé en python) est celui qui sera utilisé.}
+\textit{Il s'agit ici de mettre en application la partie 1 en calculant une valeur approchée de $\log(2)$ sur p d\'ecimales, tout en \'evaluant l'erreur relative obtenue.}
+\vskip 1mm ~
+
+Nous avons commencé par réaliser l'implémentation de l'algorithme~\ref{alg:algo_ln} en Python.
 
 \begin{algorithm}
   \caption{Calcul d'une valeur approchée de $\log(2)$ sur p d\'ecimales}
