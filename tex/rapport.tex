@@ -341,7 +341,7 @@ La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des v
 
   %%%%%%%%%%%%%%%%%%%%%%% algorithmes pour calculer les fonctions exp et trigonométriques
 
-  Maintenant, nous voulons trouver un moyen pour évaluer les fonctions exponentielle et trigonométriques. Concr\'etement, plusieurs techniques se pr\'esentent pour r\'ealiser cette t\^ache. En particulier, on s'int\'eresse aux algorithmes CORDIC (Coordinate Rotation Digital Computer) sur les calculatrices, introduient dans la m\^eme section qu'évoquée en début de section~\ref{sec:cordic}. La technique de base nécessite une valeur pr\'ecalcul\'ee (par exemple $\ln(10)$ pour le calcul de la fonction $\ln$) et se d\'eroule en deux \'etapes :
+  Maintenant, nous voulons trouver un moyen pour évaluer les fonctions exponentielle et trigonométriques. Concr\'etement, plusieurs techniques se pr\'esentent pour r\'ealiser cette t\^ache. En particulier, on s'int\'eresse aux algorithmes CORDIC (COordinate Rotation Digital Computer) sur les calculatrices, introduites dans la m\^eme section qu'évoquée en début de section~\ref{sec:cordic}. La technique de base nécessite une valeur pr\'ecalcul\'ee (par exemple $\ln(10)$ pour le calcul de la fonction $\ln$) et se d\'eroule en deux \'etapes :
   \begin{enumerate}
   \item Ramener la valeur à \'evaluer dans l'intervalle où la m\'ethode est applicable. Voici un exemple de transformation utilis\'ee pour le calcul de la fonction $\ln$ sur $[1,10[$ :
       \begin{equation}
