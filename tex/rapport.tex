@@ -19,7 +19,7 @@
 
 %%%%%%%%%%%%%%%% Variables %%%%%%%%%%%%%%%%
 \def\projet{1}
-\def\titre{M\'ethodes de calcul numérique/Limites de la machine}
+\def\titre{M\'ethodes de calcul numérique / Limites de la machine}
 \def\groupe{4}
 \def\equipe{18224}
 \def\responsible{gardouin}
@@ -158,69 +158,42 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
   \label{eq:delta_mult}
 \end{equation}
 À l'aide de ces fonctions, nous pouvons réaliser l'étude des erreurs relatives pour un $x$ fixé. Voir fin du document pour les graphes des tests réalisés. Ces erreurs relatives sont représentées en figure~\ref{fig:relative_error}.
+\vskip 1mm ~
 
 \begin{figure}[ht]
   \centering
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Partie1-delta_add_0-100.png}
-    \caption{Erreur relative pour l'addition de $x = ????$ et $y\in[0,100]$}
+    \includegraphics[width=\linewidth]{Partie1-delta_add_1-100.png}
+    \caption{Erreur relative pour l'addition de $x = -51.391$ et $y\in[1,100]$}
     \label{subfig:delta_add_big}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Partie1-delta_add_95-125.png}
-    \caption{Erreur relative pour l'addition de $x = ????$ et $y\in[95,125]$}
+    \includegraphics[width=\linewidth]{Partie1-delta_add_45-60.png}
+    \caption{Erreur relative pour l'addition de $x = -51.391$ et $y\in[45,60]$}
     \label{subfig:delta_add_zoom}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
-      \includegraphics[width=\linewidth]{Partie1-delta_mult_0-100.png}
-      \caption{Erreur relative pour la multiplication de $x = ????$ et $y\in[0,100]$}
+      \includegraphics[width=\linewidth]{Partie1-delta_mult_1-100.png}
+      \caption{Erreur relative pour la multiplication de $x = 12$ et $y\in[1,100]$}
       \label{subfig:delta_multi_big}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Partie1-delta_mult_15-20.png}
-    \caption{Erreur relative pour la multiplication de $x = ????$ et $y\in[15,20]$}
+    \includegraphics[width=\linewidth]{Partie1-delta_mult_80-120.png}
+    \caption{Erreur relative pour la multiplication de $x = 12$ et $y\in[80,120]$}
     \label{subfig:delta_mult_zoom}
     \end{subfigure}
   \caption{Représentations des erreurs relatives pour l'addition et la multiplication}
   \label{fig:relative_error}
 \end{figure}
 
-[COMMENTAIRES AVEC RÉFÉRENCES]
+Pour l'addition, nous avons fixé $x = -51.391$ et nous avons regardé les valeurs de $\texttt{delta\_add(x,y)}$ pour $y\in[1,100]$. En effet, l’erreur relative est grande si $x\simeq -y$. Cette remarque est confirmée quand on observe les figures~\ref{subfig:delta_add_big} et~\ref{subfig:delta_add_zoom} où on obtient une erreur relative maximale de $5.10^{-3}$, ce qui peut s'avérer problématique dans certaines utilisations.
 
-
-
-%\begin{figure}[ht]
-%  \centering
-%  \includegraphics[width=0.5\textwidth]{Partie1-delta_add_0-100.png}
-%  \caption{...}
-%  \label{fig:delta_add_big}        
-%\end{figure}
-
-%\begin{figure}[ht]
-%  \centering
-%  \includegraphics[width=0.5\textwidth]{Partie1-delta_add_95-125.png}
-%  \caption{...}
-%  \label{fig:delta_add_zoom}        
-%\end{figure}
-
-%\begin{figure}[ht]
-%  \centering
-%  \includegraphics[width=0.5\textwidth]{Partie1-delta_mult_0-100.png}
-%  \caption{...}
-%  \label{fig:delta_mult_big}        
-%\end{figure}
-
-%\begin{figure}[ht]
-  %\centering
-  %\includegraphics[width=0.5\textwidth]{Partie1-delta_mult_15-20.png}
-  %\caption{...}
- % \label{fig:delta_mult_zoom}        
-%\end{figure}
+Concernant la multiplication, nous avons fixé $x = 12$ car il s'agit d'un nombre premier, et nous avons regardé les valeurs de $\texttt{delta\_mult(x,y)}$ pour $y\in[1,100]$ reprentées en figure~\ref{subfig:delta_multi_big}. On remarque que l'erreur est maximale autour de $x = 8$ et décroit avant de re-croître brusquement autour de $x = 83$. Nous avons alors regardé pour $y\in[80,120]$ en figure~\ref{subfig:delta_mult_zoom} et on remarque que l'erreur relative oscille.
  
   %%%%%%%%%%%%%%%%%%%%%% description
 
@@ -307,7 +280,7 @@ Afin d'estimer l'erreur relative commise par la fonction \verb|calc_log|, nous a
   \label{eq:delta_log}
  \end{equation} 
 
-La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des valeurs de $p$ allant de $1$ à $20$. On peut remarquer que l'erreur est relativement importante pour $p<3$, mais que au-delà de $p=5$, l'erreur se stabilise environ à $2.10^{-5}$, ce qui représente une erreur acceptable.
+La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des valeurs de $p$ allant de $1$ à $20$. On peut remarquer que l'erreur est relativement importante pour $p<3$, mais que au-delà de $p=5$, l'erreur se stabilise environ à $2.10^{-5}$, ce qui représente une erreur acceptable dans certains cadres d'utilisation.
 
 \begin{figure}[ht]
  \centering
