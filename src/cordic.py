@@ -1,5 +1,5 @@
 import math
-import decimal_ 
+import decimal_
 
 L=[math.log(2), math.log(1.1), math.log(1.01), math.log(1.001), math.log(1.0001), math.log(1.00001), math.log(1.000001)]
 
