@@ -1,19 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-# def rp(x,p):
-#     k = x
-#     i=0
-#     while(k>0):
-#         k = k//10
-#         i+=1
-#     return round(x, p-i)
-
-
-#print(rp(1234.56789, 2))
-
-# Pour obtenir la puissance de l'écriture scientifique
+# Entrée : x réel
+# Sortie : la puissance de 10 de l'écriture scientifique de x
 def sc_writing_pow(x):
     i = 0
     if x >= 1:
@@ -24,7 +13,10 @@ def sc_writing_pow(x):
         while (x*(10**i) < 1):
             i += 1
         return -i
-#Ecriture deciale reduite
+
+# rp : Écriture décimale réduite
+# Entrée : x un réel et p un entier
+# Sortie : l'écriture réduite de x avec une précision de p décimales
 def rp(x,p):
     i_sc = sc_writing_pow(x)
     x_sc = x / (10**i_sc)
@@ -32,6 +24,106 @@ def rp(x,p):
     x_rp = x_sc_r * 10**(i_sc)
     return round(x_rp,p-i_sc)
 
+# 'Comme il ne s’agit que d’une simulation, on supposera que p est faible.'
+# On choisit alors p = 3 pour la suite
+
+# add : simulation de l'addition
+# Entrée : x_1 et x_2 deux réels
+# Sortie : représentation décimale réduite de la somme de x_1 et x_2
+def add(x_1,x_2):
+    p = 3
+    res = x_1 + x_2
+    return rp(res,p)
+
+# mult : simulation de la multiplication
+# Entrée : x_1 et x_2 deux réels
+# Sortie : représentation décimale réduite du produit de x_1 et x_2
+def mult(x_1,x_2):
+    p = 3
+    res = x_1 * x_2
+    return rp(res,p)
+
+# delta_add : erreur relative de l'addition
+# Entrée : x et y deux réels
+# Sortie : erreur relative de x + y
+def delta_add(x,y):
+    return abs(((x+y)-add(x,y)))/abs(x+y)
+
+# delta_mult : erreur relative du produit
+# Entrée : x et y deux réels
+# Sortie : erreur relative de x * y
+def delta_mult(x,y):
+    return abs(((x*y)-mult(x,y)))/abs(x*y)
+
+# question_5 : choix de x pour faire apparaître la plus grande erreur relative possible
+# Entrée : ()
+# Sortie : 
+def question_5():
+    max_delta_add=0
+    max_delta_mult=0
+    max_x=0
+    max_y=0
+    max_x_m=0
+    max_y_m=0
+    x=6213.1358
+    # for x in range(1,1000000):
+    for y in range(1,1000000):
+        y=y/100
+        d_a=delta_add(x,y)
+        d_m=delta_mult(x,y)
+        if d_a>max_delta_add:
+            max_delta_add=d_a
+            max_x=x
+            max_y=y
+        if d_m>max_delta_mult:
+            max_delta_mult=d_m
+            max_x_m=x
+            max_y_m=y
+    print("add : max : ",max_delta_add,"pour : ",max_x,"et",max_y)
+    print("mul : max : ",max_delta_mult,"pour : ",max_x_m,"et",max_y_m)
+
+# question_5()
+# L'exécution de la fonction donne x = 6213.1358
+
+# plot_delta_add : graphe de l'erreur relative de x + y
+# Entrée : y_min et y_max réels
+# Sortie : graphe de l'erreur relative de x + y avec y compris entre y_min et y_max
+def plot_delta_add(y_min,y_max):
+    x = 6213.1358
+    Y=np.arange(y_min,y_max,0.001)
+    D_m = []
+    for k in range(len(Y)):
+        D_m.append(delta_add(x,Y[k]))
+    plt.plot(Y,D_m)
+    plt.ylabel('Delta_addition de x par y')
+    plt.xlabel('variation de y, avec x fixé à 6213.1358')
+    plt.show()
+    return None
+
+# plot_delta_add(1,100)
+# plot_delta_add(95,125)
+
+# plot_delta_mult : graphe de l'erreur relative de x * y
+# Entrée : y_min et y_max réels
+# Sortie : graphe de l'erreur relative de x * y avec y compris entre y_min et y_max
+def plot_delta_mult(y_min,y_max):
+    x = 6213.1358
+    Y=np.arange(y_min,y_max,0.001)
+    D_m = []
+    for k in range(len(Y)):
+        D_m.append(delta_mult(x,Y[k]))
+    plt.plot(Y,D_m)
+    plt.ylabel('Delta_multiplication de x par y')
+    plt.xlabel('variation de y, avec x fixé à 6213.1358')
+    plt.show()
+    return None
+
+# plot_delta_mult(1,100)
+# plot_delta_mult(15,20)
+
+# test_rp : tests de la fonction rp
+# Entrée : ()
+# Sortie : ()
 def test_rp():
     x1 = 3.141592658
     x2 = 10507.1823
@@ -74,107 +166,4 @@ def test_rp():
 
     return None
 
-test_rp()
-
-def nb_sgnf_numbers(x):
-    print(x," :")
-    x_str = str(x)
-    cmp=0
-    i=0
-    while ( x_str[i]=='0' or x_str[i]=='.'):
-        i+=1
-    while i<len(x_str):
-        if x_str[i]!='.':
-            cmp+=1
-        print("    i:", i, " cmp:",cmp)
-        i+=1
-    return cmp
-
-
-    # #probleme pour x_2 et x_4 
-    # i_sc = sc_writing_pow(x)
-    # x_sc = x / (10**i_sc)
-    # x_sc=str(x_sc)
-    # print(x_sc)
-    # if x_sc[-1]=='0':
-    #     return 1
-    
-    # return len(x_sc)-1
-
-#On 'essaie' de chercher le nombre de chiffres significatifs
-"""
-def test_nb_sgnf_numbers():
-
-    x_1=0.000125
-    x_2=000012500.00
-    x_5=12500.0
-    x_3=00.01
-    x_4= 00.010
-
-    assert(nb_sgnf_numbers(x_1) == 3)
-    assert(nb_sgnf_numbers(x_3) == 1)
-    assert(nb_sgnf_numbers(x_2) == 6)
-    assert(nb_sgnf_numbers(x_4) == 2)
-
-test_nb_sgnf_numbers()
-"""
-#On choisit 6 chiffres significatifs
-def add(x_1,x_2):
-    p=3
-    return rp(x_1,p)+rp(x_2,p)
-
-def mult(x_1,x_2):
-    res = x_1 * x_2
-    return rp(res,3)
-
-def delta_add(x,y):
-    return abs(((x+y)-add(x,y)))/abs(x+y)
-
-print(delta_add(12453035,1890692))
-
-def delta_mult(x,y):
-    return abs(((x*y)-mult(x,y)))/abs(x*y)
-
-print(delta_mult(12453035,1890692))
-
-
-def question_5():
-    max_delta_add=0
-    max_delta_mult=0
-    max_x=0
-    max_y=0
-    max_x_m=0
-    max_y_m=0
-    x=6213.1358
-    # for x in range(1,1000000):
-    for y in range(1,1000000):
-        y=y/100
-        d_a=delta_add(x,y)
-        d_m=delta_mult(x,y)
-        if d_a>max_delta_add:
-            max_delta_add=d_a
-            max_x=x
-            max_y=y
-        if d_m>max_delta_mult:
-            max_delta_mult=d_m
-            max_x_m=x
-            max_y_m=y
-    print("add : max : ",max_delta_add,"pour : ",max_x,"et",max_y)
-    print("mul : max : ",max_delta_mult,"pour : ",max_x_m,"et",max_y_m)
-
-# question_5()
-
-
-Y=np.arange(15,20,0.001)
-print(Y[0],Y[1],Y[2])
-# plt.plot(delta_add(6213.1358,Y))
-D_m = []
-for k in range(len(Y)):
-    D_m.append(delta_mult(6213.1358,Y[k]))
-print("ok")
-print(type(Y),type(D_m))
-plt.plot(Y,D_m)
-plt.ylabel('Delta_multiplication de x par y')
-plt.xlabel('variation de y, avec x fixé à 3213.1358')
-plt.show()
-
+# test_rp()
