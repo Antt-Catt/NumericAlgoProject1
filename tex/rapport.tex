@@ -11,6 +11,7 @@
 \usepackage{subcaption}
 \usepackage{url}
 \usepackage{hyperref}
+\usepackage{float}
 
 %%%%%%%%%%%%%%%% Lengths %%%%%%%%%%%%%%%%
 \setlength{\textwidth}{15.5cm}
@@ -282,7 +283,7 @@ Afin d'estimer l'erreur relative commise par la fonction \verb|calc_log|, nous a
 
 La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des valeurs de $p$ allant de $1$ à $20$. On peut remarquer que l'erreur est relativement importante pour $p<3$, mais que au-delà de $p=5$, l'erreur se stabilise environ à $2.10^{-5}$, ce qui représente une erreur acceptable dans certains cadres d'utilisation.
 
-\begin{figure}[ht]
+\begin{figure}[H]
  \centering
  \includegraphics[width=0.8\textwidth]{partie2_relative_error_log.png}
  \caption{Erreur relative de la fonction $\texttt{calc\_log}$ pour différentes valeurs de $p$}
@@ -349,6 +350,9 @@ La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des v
     \item Appliquer l'algorithme correspondant en int\'erant sur l'indice k de l'\'el\'ement pr\'ecalcul\'e en commen\c cant par le plus grand terme.
   \end{enumerate}
   Cette m\'ethode est bien adapt\'ee aux conditions impos\'ees par une calculatrice, entre autres : une m\'emoire et une puissance de calcul limit\'ee.
+  \vskip 1mm ~
+
+  En appliquant cette méthode, nous sommes parvenus à implémenter quatres fonctions \verb|ln(x)|, \verb|exp(x)|, \verb|tan(x)| et \verb|arctan(x)|. Nous avons testé ces fonctions en différentes valeurs de $x$ et différentes valeurs de $p$ pour la précision des décimales en les comparant aux fonctions équivalentes de Python. On remarquera que pour $p\geq 13$, la précision est insufisante pour obtenir le même résultat que les fonctions Python.
   %%%%%%%%% technique générale utilisée
 
   %%%%%%%%% efficacité lorsqu'elle est ramenée à une calculatrice
