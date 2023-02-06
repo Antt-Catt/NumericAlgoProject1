@@ -56,32 +56,27 @@ def delta_add(x,y):
 def delta_mult(x,y):
     return abs(((x*y)-mult(x,y)))/abs(x*y)
 
+# plot_delta_add : trouver x maximisant l'erreur relative pour y dans [0.01,100]
+# Entrée : ()
+# Sortie : x maximisant l'erreur relative
 def choose_x():
-    #max_delta_add = 0
     max_delta_mult = 0
-    #max_x_add = 0
     max_x_mult = 0
-    x = 0.001
-    while x < 1:
-        y = 0.001
+    x = 0.01
+    while x < 10:
+        y = 0.01
         while y < 100:
-            #d_a = delta_add(x,y)
             d_m = delta_mult(x,y)
-            #print(d_m)
-            # if d_a > max_delta_add:
-            #     max_delta_add = d_a
-            #     max_x_add = x
-            if d_m < max_delta_mult:
+            if d_m > max_delta_mult:
                 max_delta_mult = d_m
                 max_x_mult = x
-            y += 0.001
-            #print(x)
-            #print(y)
-        x += 0.001
+            y += 0.01
+        x += 0.01
         print(x)
     return max_x_mult
     
-#print(choose_x())
+# print(choose_x())
+# max_x_mult = 0.15
 
 # plot_delta_add : graphe de l'erreur relative de x + y avec y compris entre y_min et y_max
 # Entrée : y_min et y_max réels
@@ -105,19 +100,19 @@ def plot_delta_add(y_min,y_max):
 # Entrée : y_min et y_max réels
 # Sortie : ()
 def plot_delta_mult(y_min,y_max):
-    x = 6213.1358
+    x = 0.15
     Y=np.arange(y_min,y_max,0.001)
     D_m = []
     for k in range(len(Y)):
         D_m.append(delta_mult(x,Y[k]))
     plt.plot(Y,D_m)
     plt.ylabel('Delta_multiplication de x par y')
-    plt.xlabel('variation de y, avec x fixé à 6213.1358')
+    plt.xlabel('variation de y')
     plt.show()
     return None
 
-# plot_delta_mult(1,100)
-# plot_delta_mult(15,20)
+# plot_delta_mult(-100,100)
+# plot_delta_mult(60,120)
 
 # test_rp : tests de la fonction rp
 # Entrée : ()
