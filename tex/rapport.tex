@@ -194,7 +194,7 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
 
 Pour l'addition, nous avons fixé $x = -51.391$ et nous avons regardé les valeurs de $\texttt{delta\_add(x,y)}$ pour $y\in[1,100]$. En effet, l’erreur relative est grande si $x\simeq -y$. Cette remarque est confirmée quand on observe les figures~\ref{subfig:delta_add_big} et~\ref{subfig:delta_add_zoom} où on obtient une erreur relative maximale de $5.10^{-3}$, ce qui peut s'avérer problématique dans certaines utilisations.
 
-Concernant la multiplication, nous avons fixé $x = 0,15$ car nous avons trouvé que cette valeur maximisait l'erreur relative pour le produit. Nous avons alors regardé les valeurs de $\texttt{delta\_mult(x,y)}$ pour $y\in[-100,100]$ reprentées en figure~\ref{subfig:delta_multi_big}. On remarque que l'erreur est maximale autour de pour différentes valeurs de $x$, à $5.10^{-3}$. Il y a ensuite une décroissance, symétrique, de l'erreur relative brusquement autour de $x = 67$ par exemple. Nous avons alors regardé pour $y\in[60,120]$ en figure~\ref{subfig:delta_mult_zoom} et on remarque que l'erreur relative oscille.
+Concernant la multiplication, nous avons fixé $x = 0,15$ car nous avons trouvé que cette valeur maximisait l'erreur relative pour le produit. Nous avons alors regardé les valeurs de $\texttt{delta\_mult(x,y)}$ pour $y\in[-100,100]$ reprentées en figure~\ref{subfig:delta_multi_big}. On remarque que l'erreur est maximale pour différentes valeurs de $x$, à $5.10^{-3}$. Il y a ensuite une décroissance, symétrique, de l'erreur relative brusquement autour de $x = 67$ par exemple. Nous avons alors regardé pour $y\in[60,120]$ en figure~\ref{subfig:delta_mult_zoom} et on remarque que l'erreur relative oscille.
  
   %%%%%%%%%%%%%%%%%%%%%% description
 
@@ -322,7 +322,7 @@ La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des v
   %%%%%%%%%%%%%%%%%%%%%% Calculatrice
   %%%%%%%%%%% référence
 
-{\small \textit{\textbf{N.B:}} \emph{ Les réponses ci-dessous sont en partie inspirée du chapitre VI.2 de la FAQ\footnote{\url{http://www.usenet-fr.net/fur/maths/maths-faq-3.html}} du groupe de discussions fr.sci.maths\footnote{\url{https://groups.google.com/g/fr.sci.maths}}}.
+{\small \textit{\textbf{N.B:}} \emph{ Les réponses ci-dessous sont en partie inspirées du chapitre VI.2 de la FAQ\footnote{\url{http://www.usenet-fr.net/fur/maths/maths-faq-3.html}} du groupe de discussions fr.sci.maths\footnote{\url{https://groups.google.com/g/fr.sci.maths}}}.
   \vskip 0.01mm ~
  
   %%%%%%%%% représentation des nombres utilisés sur une calculatrice
@@ -341,7 +341,7 @@ La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des v
 
   %%%%%%%%%%%%%%%%%%%%%%% algorithmes pour calculer les fonctions exp et trigonométriques
 
-  Maintenant, nous voulons trouver un moyen pour évaluer les fonctions exponentielle et trigonométriques. Concr\'etement, plusieurs techniques se pr\'esentent pour r\'ealiser cette t\^ache. En particulier, on s'int\'eresse aux algorithmes CORDIC (COordinate Rotation Digital Computer) sur les calculatrices, introduites dans la m\^eme section qu'évoquée en début de section~\ref{sec:cordic}. La technique de base nécessite une valeur pr\'ecalcul\'ee (par exemple $\ln(10)$ pour le calcul de la fonction $\ln$) et se d\'eroule en deux \'etapes :
+  Maintenant, nous voulons trouver un moyen pour évaluer les fonctions exponentielle et trigonométriques. Concr\'etement, plusieurs techniques se pr\'esentent pour r\'ealiser cette t\^ache. En particulier, on s'int\'eresse aux algorithmes CORDIC (COordinate Rotation Digital Computer) sur les calculatrices, introduites sur la m\^eme page évoquée en début de section~\ref{sec:cordic}. La technique de base nécessite une valeur pr\'ecalcul\'ee (par exemple $\ln(10)$ pour le calcul de la fonction $\ln$) et se d\'eroule en deux \'etapes :
   \begin{enumerate}
   \item Ramener la valeur à \'evaluer dans l'intervalle où la m\'ethode est applicable. Voici un exemple de transformation utilis\'ee pour le calcul de la fonction $\ln$ sur $[1,10[$ :
       \begin{equation}
@@ -352,7 +352,7 @@ La figure~\ref{fig:relative_error_log} illustre cette erreur relative pour des v
   Cette m\'ethode est bien adapt\'ee aux conditions impos\'ees par une calculatrice, entre autres : une m\'emoire et une puissance de calcul limit\'ee.
   \vskip 1mm ~
 
-  En appliquant cette méthode, nous sommes parvenus à implémenter quatres fonctions \verb|ln(x)|, \verb|exp(x)|, \verb|tan(x)| et \verb|arctan(x)|. Nous avons testé ces fonctions en différentes valeurs de $x$ et différentes valeurs de $p$ pour la précision des décimales en les comparant aux fonctions équivalentes de Python. On remarquera que pour $p\geq 13$, la précision est insufisante pour obtenir le même résultat que les fonctions Python.
+  En appliquant cette méthode, nous sommes parvenus à implémenter quatres fonctions \verb|ln(x)|, \verb|exp(x)|, \verb|tan(x)| et \verb|arctan(x)|. Nous avons testé ces fonctions en différentes valeurs de $x$ et différentes valeurs de $p$ pour la précision des décimales en les comparant aux fonctions équivalentes de Python. On remarquera que pour $p\geq 13$, la précision est insuffisante pour obtenir le même résultat que les fonctions Python.
   %%%%%%%%% technique générale utilisée
 
   %%%%%%%%% efficacité lorsqu'elle est ramenée à une calculatrice
