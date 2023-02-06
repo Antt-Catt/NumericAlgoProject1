@@ -178,14 +178,14 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
-      \includegraphics[width=\linewidth]{Partie1-delta_mult_1-100.png}
-      \caption{Erreur relative pour la multiplication de $x = 12$ et $y\in[1,100]$}
+      \includegraphics[width=\linewidth]{Partie1-delta_mult_100-100.png}
+      \caption{Erreur relative pour la multiplication de $x = 0,15$ et $y\in[-100,100]$}
       \label{subfig:delta_multi_big}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Partie1-delta_mult_80-120.png}
-    \caption{Erreur relative pour la multiplication de $x = 12$ et $y\in[80,120]$}
+    \includegraphics[width=\linewidth]{Partie1-delta_mult_60-120.png}
+    \caption{Erreur relative pour la multiplication de $x = 0,15$ et $y\in[60,120]$}
     \label{subfig:delta_mult_zoom}
     \end{subfigure}
   \caption{Représentations des erreurs relatives pour l'addition et la multiplication}
@@ -194,7 +194,7 @@ Enfin, à l'aide des fonctions \verb|add(x1,x2)| et \verb|mult(x1,x2)|, nous avo
 
 Pour l'addition, nous avons fixé $x = -51.391$ et nous avons regardé les valeurs de $\texttt{delta\_add(x,y)}$ pour $y\in[1,100]$. En effet, l’erreur relative est grande si $x\simeq -y$. Cette remarque est confirmée quand on observe les figures~\ref{subfig:delta_add_big} et~\ref{subfig:delta_add_zoom} où on obtient une erreur relative maximale de $5.10^{-3}$, ce qui peut s'avérer problématique dans certaines utilisations.
 
-Concernant la multiplication, nous avons fixé $x = 12$ car il s'agit d'un nombre premier, et nous avons regardé les valeurs de $\texttt{delta\_mult(x,y)}$ pour $y\in[1,100]$ reprentées en figure~\ref{subfig:delta_multi_big}. On remarque que l'erreur est maximale autour de $x = 8$ et décroit avant de re-croître brusquement autour de $x = 83$. Nous avons alors regardé pour $y\in[80,120]$ en figure~\ref{subfig:delta_mult_zoom} et on remarque que l'erreur relative oscille.
+Concernant la multiplication, nous avons fixé $x = 0,15$ car nous avons trouvé que cette valeur maximisait l'erreur relative pour le produit. Nous avons alors regardé les valeurs de $\texttt{delta\_mult(x,y)}$ pour $y\in[-100,100]$ reprentées en figure~\ref{subfig:delta_multi_big}. On remarque que l'erreur est maximale autour de pour différentes valeurs de $x$, à $5.10^{-3}$. Il y a ensuite une décroissance, symétrique, de l'erreur relative brusquement autour de $x = 67$ par exemple. Nous avons alors regardé pour $y\in[60,120]$ en figure~\ref{subfig:delta_mult_zoom} et on remarque que l'erreur relative oscille.
  
   %%%%%%%%%%%%%%%%%%%%%% description
 
