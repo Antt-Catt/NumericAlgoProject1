@@ -1,20 +1,17 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+# sc_writing_pow : trouver l'écriture scientifique d'un entier
 # Entrée : x réel
 # Sortie : la puissance de 10 de l'écriture scientifique de x
 def sc_writing_pow(x):
     i = 0
-    if x >= 1 or x <= -1:
-        while (x/(10**i) > 10):
+    if (x >= 1) or (x <= -1):
+        while (abs(x/(10**i)) > 10):
             i += 1
         return i
-    elif x >= 0:
-        while (x*(10**i) < 1):
-            i += 1
-        return -i
     else:
-        while (x*(10**i) > -1):
+        while (abs(x*(10**i)) < 1):
             i += 1
         return -i
 
@@ -59,57 +56,54 @@ def delta_add(x,y):
 def delta_mult(x,y):
     return abs(((x*y)-mult(x,y)))/abs(x*y)
 
-# question_5 : choix de x pour faire apparaître la plus grande erreur relative possible
-# Entrée : ()
-# Sortie : 
-def question_5():
-    max_delta_add=0
-    max_delta_mult=0
-    max_x=0
-    max_y=0
-    max_x_m=0
-    max_y_m=0
-    x=6213.1358
-    # for x in range(1,1000000):
-    for y in range(1,1000000):
-        y=y/100
-        d_a=delta_add(x,y)
-        d_m=delta_mult(x,y)
-        if d_a>max_delta_add:
-            max_delta_add=d_a
-            max_x=x
-            max_y=y
-        if d_m>max_delta_mult:
-            max_delta_mult=d_m
-            max_x_m=x
-            max_y_m=y
-    print("add : max : ",max_delta_add,"pour : ",max_x,"et",max_y)
-    print("mul : max : ",max_delta_mult,"pour : ",max_x_m,"et",max_y_m)
+def choose_x():
+    #max_delta_add = 0
+    max_delta_mult = 0
+    #max_x_add = 0
+    max_x_mult = 0
+    x = 0.001
+    while x < 1:
+        y = 0.001
+        while y < 100:
+            #d_a = delta_add(x,y)
+            d_m = delta_mult(x,y)
+            #print(d_m)
+            # if d_a > max_delta_add:
+            #     max_delta_add = d_a
+            #     max_x_add = x
+            if d_m < max_delta_mult:
+                max_delta_mult = d_m
+                max_x_mult = x
+            y += 0.001
+            #print(x)
+            #print(y)
+        x += 0.001
+        print(x)
+    return max_x_mult
+    
+#print(choose_x())
 
-# question_5()
-# L'exécution de la fonction donne x = 6213.1358
-
-# plot_delta_add : graphe de l'erreur relative de x + y
+# plot_delta_add : graphe de l'erreur relative de x + y avec y compris entre y_min et y_max
 # Entrée : y_min et y_max réels
-# Sortie : graphe de l'erreur relative de x + y avec y compris entre y_min et y_max
+# Sortie : ()
 def plot_delta_add(y_min,y_max):
-    x = 6213.1358
+    x = -51.391
     Y=np.arange(y_min,y_max,0.001)
     D_m = []
     for k in range(len(Y)):
         D_m.append(delta_add(x,Y[k]))
     plt.plot(Y,D_m)
     plt.ylabel('Delta_addition de x par y')
-    plt.xlabel('variation de y, avec x fixé à 6213.1358')
+    plt.xlabel('variation de y')
     plt.show()
     return None
 
 # plot_delta_add(1,100)
-# plot_delta_add(95,125)
+# plot_delta_add(45,60)
 
-# plot_delta_mult : graphe de l'erreur relative de x * y
+# plot_delta_mult : graphe de l'erreur relative de x * y avec y compris entre y_min et y_max
 # Entrée : y_min et y_max réels
-# Sortie : graphe de l'erreur relative de x * y avec y compris entre y_min et y_max
+# Sortie : ()
 def plot_delta_mult(y_min,y_max):
     x = 6213.1358
     Y=np.arange(y_min,y_max,0.001)
