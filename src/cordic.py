@@ -21,7 +21,7 @@ def ln(x):
 
 # Algorithme CORDIC pour exp
 def exp(x):
-    if(x>=math.log(10) or x<1):
+    if(x>=math.log(10) or x<0):
         n = sc_writing_pow(x)
         return exp(x-n*math.log(10))*(10**(n))
     k=0
